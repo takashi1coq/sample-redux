@@ -1,5 +1,7 @@
 import {Action} from 'redux'
 
+// ActionCreater
+
 enum ActionNames {
   INC = 'counter/increment',
   DEC = 'counter/decrement',
@@ -29,6 +31,8 @@ export interface CounterState {
 }
 
 export type CounterActions = IncrementAction | DecrementAction
+
+// Reducer
 
 const initialState:CounterState = {num: 0}
 

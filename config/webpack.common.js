@@ -19,6 +19,9 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
+                include: [
+                  path.resolve(__dirname, "src")
+                ],
                 loader: 'ts-loader'
             }
         ]

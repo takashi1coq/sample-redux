@@ -1,4 +1,4 @@
-import counter, {CounterActions, CounterState} from './counter/module'
+import counter, {CounterActions, CounterState} from 'modules/counterModule'
 import {createStore, combineReducers, Action} from 'redux'
 
 export default createStore(
