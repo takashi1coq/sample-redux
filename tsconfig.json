@@ -18,6 +18,11 @@
     "module": "ES2015",
     "target": "es5",
     "jsx": "react",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+        "views": ["views/"],
+        "containers": ["containers/"],
+        "modules": ["modules/"]
+    }
   }
 }

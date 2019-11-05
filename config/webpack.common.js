@@ -19,15 +19,17 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                include: [
-                  path.resolve(__dirname, "src")
-                ],
                 loader: 'ts-loader'
             }
         ]
     },
     resolve: {
-        extensions: [ '.ts', '.tsx', '.js' ]
+        extensions: [ '.ts', '.tsx', '.js' ],
+        alias: {
+            views : path.resolve('src/views'),
+            modules : path.resolve('src/modules'),
+            containers : path.resolve('src/containers'),
+        }
     },
     output: {
         path: path.resolve('public'),
