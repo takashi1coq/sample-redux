@@ -1,12 +1,12 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import Counter from 'containers/counter/Container'
+import { render } from 'react-dom'
 import store from './store'
 import {Provider} from 'react-redux'
+import {Routes} from './Root'
 
-ReactDOM.render(
+render(
   <Provider store={store}>
-    <Counter />
+    <Routes />
   </Provider>
   , document.getElementById('app')
 )
