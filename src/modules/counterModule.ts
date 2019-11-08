@@ -50,7 +50,7 @@ export function* watchIncrementAsync() {
   yield takeEvery(ActionNames.Asy, incrementAsync)
 }
 
-// まとめといて後でdispatch
+// まとめといてDispatcherへ
 export type CounterActions = IncrementAction | DecrementAction | AsyncIncrementAmout
 
 
