@@ -13,6 +13,7 @@ export function Counter(props: Props) {
         <p>score: {props.value.num}</p>
         <button onClick={() => props.actions.increment(3)}>追加 3</button>
         <button onClick={() => props.actions.decrement(2)}>減らす 2</button>
+        <button onClick={() => props.actions.asyncIncrement()}>非同期で６くらい増やす </button>
       </div>
     )
 }

@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux'
-import {CounterActions, decrementAmount, incrementAmount} from 'modules/counterModule'
+import {CounterActions, decrementAmount, incrementAmount, asyncIncrementAmout} from 'modules/counterModule'
 
 export class ActionDispatcher {
   constructor(private dispatch: Dispatch<CounterActions>) {}
@@ -10,6 +10,10 @@ export class ActionDispatcher {
 
   public decrement(amount: number) {
     this.dispatch(decrementAmount(amount))
+  }
+
+  public asyncIncrement() {
+    this.dispatch(asyncIncrementAmout())
   }
 }
 
