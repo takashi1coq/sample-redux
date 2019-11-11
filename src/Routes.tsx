@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Counter from 'containers/counter/Container'
-import {Header} from 'views/Header'
+import SampleMain from 'views/SampleMain'
 
 export function Routes() {
     return(
         <Router>
         <Switch>
-            <Route path='/' exact component={Header} />
+            <Route path='/' exact component={SampleMain} />
             <Route path='/counter' exact component={Counter} />
         </Switch>
         </Router>

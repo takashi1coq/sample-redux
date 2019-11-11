@@ -22,18 +22,16 @@ const useStyles = makeStyles((theme: Theme) =>
     borderBottom: `2px solid ${theme.palette.divider}`,
     zIndex: theme.zIndex.drawer + 1,
   },
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-    toolbar: {
-      flexWrap: 'wrap',
-    },
+  root: {
+    flexGrow: 1,
+    padding: '10px',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  toolbar: {
+    flexWrap: 'wrap',
+  },
   toolbarTitle: {
     flexGrow: 1,
   },
@@ -43,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export function Header () {
+export function SampleHeader () {
     const classes = useStyles()
     return (
         <div className={classes.root}>
@@ -53,10 +51,10 @@ export function Header () {
             {headerConst.TITLE}
           </Typography>
           <nav>
-            <Link variant="button" color="textPrimary" href={headerLink.LINK_ONE} className={classes.link}>
+            <Link variant="button" color="inherit" href={headerLink.LINK_ONE} className={classes.link}>
                 {headerConst.LINK_ONE}
             </Link>
-            <Link variant="button" color="textPrimary" href={headerLink.LINK_TWO} className={classes.link}>
+            <Link variant="button" color="inherit" href={headerLink.LINK_TWO} className={classes.link}>
                 {headerConst.LINK_TWO}
             </Link>
           </nav>
