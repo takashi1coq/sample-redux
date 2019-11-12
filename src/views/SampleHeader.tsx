@@ -1,65 +1,82 @@
-import * as React from 'react'
+import React, { ReactElement } from 'react'
 import AppBar from '@material-ui/core/AppBar'
-import {makeStyles, Theme, createStyles} from '@material-ui/core/styles'
-import {Toolbar, Typography, Link } from '@material-ui/core'
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { Toolbar, Typography, Link } from '@material-ui/core'
 
-// 内部用のつもりだがなんとなくexportしている
-namespace headerConst {
-    export const TITLE = 'Sample Redux'
-    export const LINK_ONE = 'カウンターコンテナーへ'
-    export const LINK_TWO = 'これから作るコンテナーへ'
-}
-// リンク (もう少し考える)
-namespace headerLink {
-    export const LINK_ONE = './counter'
-    export const LINK_TWO = './example'
+const HEADER_CONST: {
+  readonly title: string
+  readonly linkOne: string
+  readonly linkTwo: string
+} = {
+  title: 'Sample Redux',
+  linkOne: 'カウンターコンテナへ',
+  linkTwo: 'その他コンテナへ',
 }
 
+const HEADER_LINK: {
+  readonly linkOne: string
+  readonly linkTwo: string
+} = {
+  linkOne: './counter',
+  linkTwo: './example',
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-  appBar: {
-    borderBottom: `2px solid ${theme.palette.divider}`,
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  root: {
-    flexGrow: 1,
-    padding: '10px',
-  },
-  title: {
-    flexGrow: 1,
-  },
-  toolbar: {
-    flexWrap: 'wrap',
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-  },
-  link: {
-    margin: theme.spacing(1, 1.5),
-  },
+    appBar: {
+      borderBottom: `2px solid ${theme.palette.divider}`,
+      zIndex: theme.zIndex.drawer + 1,
+    },
+    root: {
+      flexGrow: 1,
+      padding: '10px',
+    },
+    title: {
+      flexGrow: 1,
+    },
+    toolbar: {
+      flexWrap: 'wrap',
+    },
+    toolbarTitle: {
+      flexGrow: 1,
+    },
+    link: {
+      margin: theme.spacing(1, 1.5),
+    },
   }),
-);
+)
 
-export function SampleHeader () {
-    const classes = useStyles()
-    return (
-        <div className={classes.root}>
-        <AppBar position="fixed" color="primary" elevation={0} className={classes.appBar}>
+const SampleHeader: React.FC = (): ReactElement => {
+  const classes = useStyles()
+  return (
+    <div className={classes.root}>
+      <AppBar position="fixed" color="primary" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            {headerConst.TITLE}
+            {HEADER_CONST.title}
           </Typography>
           <nav>
-            <Link variant="button" color="inherit" href={headerLink.LINK_ONE} className={classes.link}>
-                {headerConst.LINK_ONE}
+            <Link
+              variant="button"
+              color="inherit"
+              href={HEADER_LINK.linkOne}
+              className={classes.link}
+            >
+              {HEADER_CONST.linkOne}
             </Link>
-            <Link variant="button" color="inherit" href={headerLink.LINK_TWO} className={classes.link}>
-                {headerConst.LINK_TWO}
+            <Link
+              variant="button"
+              color="inherit"
+              href={HEADER_LINK.linkTwo}
+              className={classes.link}
+            >
+              {HEADER_CONST.linkTwo}
             </Link>
           </nav>
         </Toolbar>
-        </AppBar>
-        </div>
-    )
+      </AppBar>
+    </div>
+  )
 }
+
+export default SampleHeader

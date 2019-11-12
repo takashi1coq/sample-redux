@@ -1,18 +1,15 @@
-import * as React from 'react'
-import {Counter} from 'views/Counter'
-import {useDispatch, useSelector} from 'react-redux'
-import { CounterState } from 'modules/counterModule'
-import {ReduxState} from 'store'
-import {ActionDispatcher} from 'containers/counter/ActionDispatcher'
+import React, { ReactElement } from 'react'
+import Counter from 'src/views/Counter'
+import { useDispatch, useSelector } from 'react-redux'
+import { CounterState } from 'src/modules/counterModule'
+import { ReduxState } from 'src/store'
+import ActionDispatcher from 'src/containers/counter/ActionDispatcher'
 
-export default function CounterContainer() {
-  const count = useSelector<ReduxState, CounterState>((state) => {
+const CounterContainer: React.FC = (): ReactElement => {
+  const count = useSelector<ReduxState, CounterState>(state => {
     return state.counter
   })
-  return (
-      <Counter
-          value={count}
-          actions={new ActionDispatcher(useDispatch())}
-      />
-  )
+  return <Counter value={count} actions={new ActionDispatcher(useDispatch())} />
 }
+
+export default CounterContainer

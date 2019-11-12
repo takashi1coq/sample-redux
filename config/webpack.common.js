@@ -26,9 +26,7 @@ module.exports = {
     resolve: {
         extensions: [ '.ts', '.tsx', '.js' ],
         alias: {
-            views : path.resolve('src/views'),
-            modules : path.resolve('src/modules'),
-            containers : path.resolve('src/containers'),
+            src : path.resolve('src'),
         }
     },
     output: {

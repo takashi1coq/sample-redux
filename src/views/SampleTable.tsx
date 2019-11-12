@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import {testRows} from './data'
+import React, { ReactElement } from 'react'
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import testRows from './data'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,10 +23,10 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: 650,
     },
   }),
-);
+)
 
-export default function SampleTable() {
-  const classes = useStyles();
+const SampleTable: React.FC = (): ReactElement => {
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>
@@ -42,20 +42,30 @@ export default function SampleTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {testRows.map((row: any) => (
+            {testRows.map(row => (
               <TableRow key={row.title.data}>
-                <TableCell component="th" scope="row" style={{backgroundColor:row.title.color}}>
+                <TableCell component="th" scope="row" style={{ backgroundColor: row.title.color }}>
                   {row.title.data}
                 </TableCell>
-                <TableCell align="right" style={{backgroundColor:row.calories.color}}>{row.calories.data}</TableCell>
-                <TableCell align="right" style={{backgroundColor:row.fat.color}}>{row.fat.data}</TableCell>
-                <TableCell align="right" style={{backgroundColor:row.carbs.color}}>{row.carbs.data}</TableCell>
-                <TableCell align="right" style={{backgroundColor:row.protein.color}}>{row.protein.data}</TableCell>
+                <TableCell align="right" style={{ backgroundColor: row.calories.color }}>
+                  {row.calories.data}
+                </TableCell>
+                <TableCell align="right" style={{ backgroundColor: row.fat.color }}>
+                  {row.fat.data}
+                </TableCell>
+                <TableCell align="right" style={{ backgroundColor: row.carbs.color }}>
+                  {row.carbs.data}
+                </TableCell>
+                <TableCell align="right" style={{ backgroundColor: row.protein.color }}>
+                  {row.protein.data}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </Paper>
     </div>
-  );
+  )
 }
+
+export default SampleTable
