@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Counter from 'containers/counter/Container'
 import SampleMain from 'views/SampleMain'
 
-export function Routes() {
+export default function Routes() {
     return(
         <Router>
         <Switch>

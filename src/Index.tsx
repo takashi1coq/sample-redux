@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { render } from 'react-dom'
-import configureStore from './store'
 import { Provider } from 'react-redux'
-import { Routes } from './Routes'
+import configureStore from './store'
+import Routes from './Routes'
 
 const store = configureStore()
 
