@@ -1,114 +1,135 @@
-const testRows = [
-  {
-    title: {
+export const testRows = [
+  [
+    {
       data: 'Frozen yoghurt',
       color: '',
     },
-    calories: {
+    {
       data: 159,
       color: '',
     },
-    fat: {
+    {
       data: 6.0,
       color: '',
     },
-    carbs: {
+    {
       data: 24,
       color: '',
     },
-    protein: {
+    {
       data: 4.0,
       color: '',
     },
-  },
-  {
-    title: {
+  ],
+  [
+    {
       data: 'Ice cream sandwich',
       color: '',
     },
-    calories: {
+    {
       data: 159,
       color: '',
     },
-    fat: {
+    {
       data: 6.0,
       color: '',
     },
-    carbs: {
+    {
       data: 24,
       color: 'lightpink',
     },
-    protein: {
+    {
       data: 4.0,
       color: '',
     },
-  },
-  {
-    title: {
+  ],
+  [
+    {
       data: 'Eclair',
       color: '',
     },
-    calories: {
+    {
       data: 159,
       color: '',
     },
-    fat: {
+    {
       data: 6.0,
       color: '',
     },
-    carbs: {
+    {
       data: 24,
       color: '',
     },
-    protein: {
+    {
       data: 4.0,
       color: '',
     },
-  },
-  {
-    title: {
+  ],
+  [
+    {
       data: 'Cupcake',
       color: '',
     },
-    calories: {
+    {
       data: 159,
       color: 'lightskyblue',
     },
-    fat: {
+    {
       data: 6.0,
       color: '',
     },
-    carbs: {
+    {
       data: 24,
       color: '',
     },
-    protein: {
+    {
       data: 4.0,
       color: '',
     },
-  },
-  {
-    title: {
+  ],
+  [
+    {
       data: 'Gingerbread',
       color: '',
     },
-    calories: {
+    {
       data: 159,
       color: '',
     },
-    fat: {
+    {
       data: 6.0,
       color: '',
     },
-    carbs: {
+    {
       data: 24,
       color: '',
     },
-    protein: {
+    {
       data: 4.0,
       color: '',
     },
-  },
+  ],
 ]
 
-export default testRows
+export const testColumns = [
+  {
+    data: '店舗ID',
+    color: '',
+  },
+  {
+    data: '店舗名称',
+    color: '',
+  },
+  {
+    data: '契約形態',
+    color: '',
+  },
+  {
+    data: '日商',
+    color: '',
+  },
+  {
+    data: '予算進捗率',
+    color: '',
+  },
+]

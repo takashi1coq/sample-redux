@@ -9,6 +9,9 @@ import {
 import { cyan } from '@material-ui/core/colors'
 import SampleHeader from 'src/views/SampleHeader'
 import SampleTable from 'src/views/SampleTable'
+import SampleChart from 'src/views/SampleChart'
+import { Container, Grid } from '@material-ui/core'
+import SampleTab from 'src/views/SampleTab'
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -21,8 +24,9 @@ const mainTheme = createMuiTheme({
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      paddingTop: theme.spacing(5),
+    container: {
+      paddingTop: theme.spacing(4),
+      //      paddingBottom: theme.spacing(4),
     },
   }),
 )
@@ -31,10 +35,22 @@ const SampleMain: React.FC = (): ReactElement => {
   const classes = useStyles()
   return (
     <ThemeProvider theme={mainTheme}>
-      <div className={classes.root}>
-        <SampleHeader />
-        <SampleTable />
-      </div>
+      <Container maxWidth="lg" className={classes.container}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <SampleHeader />
+          </Grid>
+          <Grid item xs={12}>
+            <SampleTab />
+          </Grid>
+          <Grid item xs={12}>
+            <SampleTable />
+          </Grid>
+          <Grid item xs={12}>
+            <SampleChart />
+          </Grid>
+        </Grid>
+      </Container>
     </ThemeProvider>
   )
 }

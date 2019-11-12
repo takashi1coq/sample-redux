@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import testRows from './data'
+import { testRows, testColumns } from './data'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,31 +34,19 @@ const SampleTable: React.FC = (): ReactElement => {
         <Table className={classes.table} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              {testColumns.map(column => (
+                <TableCell>{column.data}</TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {testRows.map(row => (
-              <TableRow key={row.title.data}>
-                <TableCell component="th" scope="row" style={{ backgroundColor: row.title.color }}>
-                  {row.title.data}
-                </TableCell>
-                <TableCell align="right" style={{ backgroundColor: row.calories.color }}>
-                  {row.calories.data}
-                </TableCell>
-                <TableCell align="right" style={{ backgroundColor: row.fat.color }}>
-                  {row.fat.data}
-                </TableCell>
-                <TableCell align="right" style={{ backgroundColor: row.carbs.color }}>
-                  {row.carbs.data}
-                </TableCell>
-                <TableCell align="right" style={{ backgroundColor: row.protein.color }}>
-                  {row.protein.data}
-                </TableCell>
+              <TableRow>
+                {row.map(data => (
+                  <TableCell align="right" style={{ backgroundColor: data.color }}>
+                    {data.data}
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>
