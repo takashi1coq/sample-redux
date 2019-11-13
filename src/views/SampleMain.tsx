@@ -11,7 +11,6 @@ import SampleHeader from 'src/views/SampleHeader'
 import SampleTable from 'src/views/SampleTable'
 import SampleChart from 'src/views/SampleChart'
 import { Container, Grid } from '@material-ui/core'
-import SampleTab from 'src/views/SampleTab'
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -19,6 +18,9 @@ const mainTheme = createMuiTheme({
       main: '#43a047',
     },
     secondary: cyan,
+  },
+  typography: {
+    fontSize: 13,
   },
 })
 
@@ -39,9 +41,6 @@ const SampleMain: React.FC = (): ReactElement => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <SampleHeader />
-          </Grid>
-          <Grid item xs={12}>
-            <SampleTab />
           </Grid>
           <Grid item xs={12}>
             <SampleTable />

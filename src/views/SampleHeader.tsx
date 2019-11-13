@@ -3,22 +3,15 @@ import AppBar from '@material-ui/core/AppBar'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { Toolbar, Typography, Link } from '@material-ui/core'
 
-const HEADER_CONST: {
-  readonly title: string
-  readonly linkOne: string
-  readonly linkTwo: string
-} = {
-  title: 'Sample Redux',
-  linkOne: 'カウンターコンテナへ',
-  linkTwo: 'その他コンテナへ',
+enum HEADER_CONST {
+  title = 'Sample Redux',
+  linkOne = 'カウンターコンテナへ',
+  linkTwo = 'その他コンテナへ',
 }
 
-const HEADER_LINK: {
-  readonly linkOne: string
-  readonly linkTwo: string
-} = {
-  linkOne: './counter',
-  linkTwo: './example',
+enum HEADER_LINK {
+  linkOne = './counter',
+  linkTwo = './kunitest',
 }
 
 const useStyles = makeStyles((theme: Theme) =>
