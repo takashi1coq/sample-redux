@@ -11,6 +11,7 @@ import SampleHeader from 'src/views/SampleHeader'
 import SampleTable from 'src/views/SampleTable'
 import SampleChart from 'src/views/SampleChart'
 import { Container, Grid } from '@material-ui/core'
+import CounterContainer from 'src/containers/counter/Container'
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -47,6 +48,9 @@ const SampleMain: React.FC = (): ReactElement => {
           </Grid>
           <Grid item xs={12}>
             <SampleChart />
+          </Grid>
+          <Grid item xs={12}>
+            <CounterContainer />
           </Grid>
         </Grid>
       </Container>
