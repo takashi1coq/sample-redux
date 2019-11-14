@@ -8,17 +8,18 @@ interface Props {
 }
 
 const Todo: React.FC<Props> = (props): ReactElement => {
+  const { value } = props
   const [text, setText] = useState()
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setText(e.target.value)
   }
   return (
     <div>
-    <ul>
-    {props.value.map((todo, i) => {
-      return <li key={i}>{todo.textString}</li>
-    })}
-    </ul>
+      <ul>
+        {value.map(todo => {
+          return <li>{todo.textString}</li>
+        })}
+      </ul>
       <input type="text" onChange={handleChange} />
       <button type="button" onClick={() => props.actions.alltodotext(text)}>
         todo test

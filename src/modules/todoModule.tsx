@@ -12,7 +12,9 @@ interface AllTodoAction extends Action {
 
 export const allTodoText = (text: string): AllTodoAction => ({
   type: ActionNames.ALL_TODO,
-  incrementId: Math.random().toString(36).slice(-8),
+  incrementId: Math.random()
+    .toString(36)
+    .slice(-8),
   todoText: text,
 })
 
