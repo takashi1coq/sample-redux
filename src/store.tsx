@@ -2,6 +2,7 @@ import counter, { CounterActions, CounterState } from 'src/modules/counterModule
 import { createStore, combineReducers, Action, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import createSagaMiddleware from '@redux-saga/core'
+import todo, { TodoState, TodoActions } from 'src/modules/todoModule'
 import rootSaga from './sagas'
 
 const configureStore = () => {
@@ -9,6 +10,7 @@ const configureStore = () => {
   const store = createStore(
     combineReducers({
       counter,
+      todo,
     }),
     applyMiddleware(logger, sagaMiddleware),
   )
@@ -20,6 +22,7 @@ export default configureStore
 
 export type ReduxState = {
   counter: CounterState
+  todo: TodoState[]
 }
 
-export type ReduxAction = CounterActions | Action
+export type ReduxAction = TodoActions | CounterActions | Action
