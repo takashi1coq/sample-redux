@@ -3,6 +3,7 @@ import { createStore, combineReducers, Action, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import createSagaMiddleware from '@redux-saga/core'
 import todo, { TodoState, TodoActions } from 'src/modules/todoModule'
+import apiTest, { ApiTestState, ApiTestActions } from 'src/modules/apiTest/apiTestModule'
 import rootSaga from './sagas'
 
 const configureStore = () => {
@@ -11,6 +12,7 @@ const configureStore = () => {
     combineReducers({
       counter,
       todo,
+      apiTest,
     }),
     applyMiddleware(logger, sagaMiddleware),
   )
@@ -23,6 +25,7 @@ export default configureStore
 export type ReduxState = {
   counter: CounterState
   todo: TodoState[]
+  apiTest: ApiTestState
 }
 
-export type ReduxAction = TodoActions | CounterActions | Action
+export type ReduxAction = ApiTestActions | TodoActions | CounterActions | Action
