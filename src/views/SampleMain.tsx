@@ -14,6 +14,7 @@ import { Container, Grid } from '@material-ui/core'
 import CounterContainer from 'src/containers/counter/Container'
 import TodoContainer from 'src/containers/todo/Container'
 import ApiTestContainer from 'src/containers/apiTest/Container'
+import { testColumns, testRows } from 'src/views/data'
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -46,7 +47,10 @@ const SampleMain: React.FC = (): ReactElement => {
             <SampleHeader />
           </Grid>
           <Grid item xs={12}>
-            <SampleTable />
+            <ApiTestContainer />
+          </Grid>
+          <Grid item xs={12}>
+            <SampleTable tableHeader={testColumns} tableRows={testRows} />
           </Grid>
           <Grid item xs={12}>
             <SampleChart />
@@ -56,9 +60,6 @@ const SampleMain: React.FC = (): ReactElement => {
           </Grid>
           <Grid item xs={3}>
             <CounterContainer />
-          </Grid>
-          <Grid item xs={3}>
-            <ApiTestContainer />
           </Grid>
         </Grid>
       </Container>

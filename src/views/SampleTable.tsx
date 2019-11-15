@@ -6,7 +6,6 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import { testRows, testColumns } from './data'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +24,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 )
 
-const SampleTable: React.FC = (): ReactElement => {
+export interface sampleTableProps {
+  tableHeader: { headerName: string; headerKey: string }[]
+  tableRows: { [key: string]: { data: string; color: string } }[]
+}
+
+const SampleTable: React.FC<sampleTableProps> = (props): ReactElement => {
   const classes = useStyles()
 
   return (
@@ -34,19 +38,21 @@ const SampleTable: React.FC = (): ReactElement => {
         <Table className={classes.table} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              {testColumns.map(column => (
-                <TableCell>{column.data}</TableCell>
+              {props.tableHeader.map(column => (
+                <TableCell>{column.headerName}</TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {testRows.map(row => (
+            {props.tableRows.map(row => (
               <TableRow>
-                {row.map(data => (
-                  <TableCell align="right" style={{ backgroundColor: data.color }}>
-                    {data.data}
-                  </TableCell>
-                ))}
+                {props.tableHeader.map(headerCell => {
+                  return (
+                    <TableCell style={{ backgroundColor: row[headerCell.headerKey].color }}>
+                      {row[headerCell.headerKey].data}
+                    </TableCell>
+                  )
+                })}
               </TableRow>
             ))}
           </TableBody>
