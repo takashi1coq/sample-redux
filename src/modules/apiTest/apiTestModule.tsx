@@ -17,7 +17,13 @@ export const fetchCountryApi = (): FetchCountry => ({
 // success
 interface SuccessCountry extends Action {
   type: ActionNames.SUCCESS_COUNTRY_API
-  responseItems: []
+  responseItems: {
+    name: string
+    alpha2Code: string
+    capital: string
+    demonym: string
+    subregion: string
+  }[]
 }
 export const successCountryItem = (items: []): SuccessCountry => ({
   type: ActionNames.SUCCESS_COUNTRY_API,
@@ -38,7 +44,13 @@ export type ApiTestActions = FetchCountry | SuccessCountry | ErrorCountry
 
 // state and reducer
 export interface ApiTestState {
-  resItems: []
+  resItems: {
+    name: string
+    alpha2Code: string
+    capital: string
+    demonym: string
+    subregion: string
+  }[]
 }
 
 const initialState: ApiTestState = { resItems: [] }
