@@ -8,13 +8,11 @@ import {
 } from '@material-ui/core/styles'
 import { cyan } from '@material-ui/core/colors'
 import SampleHeader from 'src/views/SampleHeader'
-import SampleTable from 'src/views/SampleTable'
 import SampleChart from 'src/views/SampleChart'
 import { Container, Grid } from '@material-ui/core'
 import CounterContainer from 'src/containers/counter/Container'
 import TodoContainer from 'src/containers/todo/Container'
 import ApiTestContainer from 'src/containers/apiTest/Container'
-import { testColumns, testRows } from 'src/views/data'
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -48,9 +46,6 @@ const SampleMain: React.FC = (): ReactElement => {
           </Grid>
           <Grid item xs={12}>
             <ApiTestContainer />
-          </Grid>
-          <Grid item xs={12}>
-            <SampleTable tableHeader={testColumns} tableRows={testRows} />
           </Grid>
           <Grid item xs={12}>
             <SampleChart />
