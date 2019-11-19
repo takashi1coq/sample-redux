@@ -1,4 +1,4 @@
-import React, { ReactElement} from 'react'
+import React, { ReactElement } from 'react'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -13,7 +13,9 @@ import {
   Alpha2CodeCell,
   CapitalCell,
   DemonymCell,
-  SubregionCell,
+  FlagCell,
+  RegionCell,
+  TranslationsCell,
 } from 'src/views/CountrySearch/Cells'
 import {useDidMount} from 'src/Wrapper'
 
@@ -36,10 +38,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 enum countryTableHeader {
   NAME = '国名',
+  JA = '和名',
+  FLAG = '国旗',
   ALPHA2CODE = '国名コード2桁',
   CAPITAL = '首都',
   DEMONYM = '住民の呼称',
-  SUBREGION = '大陸（サブリージョン）',
+  REGION = '領域/区域',
 }
 
 interface Props {
@@ -51,17 +55,15 @@ const CountryTable: React.FC<Props> = (props): ReactElement => {
   const classes = useStyles()
   const { value, actions } = props
   useDidMount(() => {
-    actions.fetchApi()
+    actions.getRegion()
+    actions.fetchApi('all')
   })
   return (
     <div className={classes.root}>
-      <button type="button" onClick={() => actions.fetchApi()}>
-        saga test
-      </button>
-      <select defaultValue='all'>
+      <select defaultValue='all' onChange={(e) => actions.fetchApi(e.target.value)}>
         <option value='all'>全て</option>
-        {value.resItems.map(select => {
-          return <option value={select.name} key={select.name}>{select.name}</option>
+        {value.resRegionItems.map(region => {
+          return <option value={region} key={region}>{region}</option>
         })}
       </select>
       <Paper className={classes.paper}>
@@ -69,20 +71,24 @@ const CountryTable: React.FC<Props> = (props): ReactElement => {
           <TableHead>
             <TableRow>
               <TableCell>{countryTableHeader.NAME}</TableCell>
+              <TableCell>{countryTableHeader.JA}</TableCell>
+              <TableCell>{countryTableHeader.FLAG}</TableCell>
               <TableCell>{countryTableHeader.ALPHA2CODE}</TableCell>
               <TableCell>{countryTableHeader.CAPITAL}</TableCell>
               <TableCell>{countryTableHeader.DEMONYM}</TableCell>
-              <TableCell>{countryTableHeader.SUBREGION}</TableCell>
+              <TableCell>{countryTableHeader.REGION}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {value.resItems.map(row => (
               <TableRow key={row.name}>
                 <NameCell value={row.name} />
+                <TranslationsCell value={row.translations.ja} />
+                <FlagCell value={row.flag} />
                 <Alpha2CodeCell value={row.alpha2Code} />
                 <CapitalCell value={row.capital} />
                 <DemonymCell value={row.demonym} />
-                <SubregionCell value={row.subregion} />
+                <RegionCell region={row.region} subregion={row.subregion} />
               </TableRow>
             ))}
           </TableBody>

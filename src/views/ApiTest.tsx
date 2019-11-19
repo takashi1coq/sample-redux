@@ -17,7 +17,7 @@ const ApiTest: React.FC<Props> = (props): ReactElement => {
           return row.name
         })}
       </p>
-      <button type="button" onClick={() => props.actions.fetchApi()}>
+      <button type="button" onClick={() => props.actions.fetchApi('all')}>
         saga test
       </button>
     </div>
