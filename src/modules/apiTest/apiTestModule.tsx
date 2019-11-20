@@ -1,4 +1,5 @@
 import { Action } from 'redux'
+import {CheckName, CheckFlag, CheckAlpha2Code, CheckCapital, CheckDemonym, CheckRegion, CheckSubRegion} from 'src/modules/apiTest/CheckData'
 
 export enum ActionNames {
   FETCH_COUNTRY = 'apitest/fetch_country',
@@ -22,7 +23,18 @@ export const fetchCountryApi = (name: string): FetchCountry => ({
 // success
 interface SuccessCountry extends Action {
   type: ActionNames.SUCCESS_COUNTRY_API
-  responseItems: []
+  responseItems: {
+    name: string
+    flag: string
+    alpha2Code: string
+    capital: string
+    demonym: string
+    region: string
+    subregion: string
+    translations: {
+        ja: string
+      }
+  }[],
 }
 export const successCountryItem = (items: []): SuccessCountry => ({
   type: ActionNames.SUCCESS_COUNTRY_API,
@@ -72,23 +84,29 @@ export const errorSearchRegionItem = (items: []): ErrorSearchRegions => ({
 
 export type ApiTestActions = FetchCountry | SuccessCountry | ErrorCountry | SearchRegions | SuccessSearchRegions | ErrorSearchRegions
 
-// state and reducer
+// state
+export interface DataInState {
+  data: string
+  redF: boolean
+}
+export interface StateInState {
+  name: DataInState
+  flag: DataInState
+  alpha2Code: DataInState
+  capital: DataInState
+  demonym: DataInState
+  region: DataInState
+  subregion: DataInState
+  translations: {
+    ja: string
+  }
+}
 export interface ApiTestState {
-  resItems: {
-    name: string
-    flag: string
-    alpha2Code: string
-    capital: string
-    demonym: string
-    region: string
-    subregion: string
-    translations: {
-      ja: string
-    }
-  }[],
+  resItems: StateInState[],
   resRegionItems: string[]
 }
 
+// reducer
 const initialState: ApiTestState = { resItems: [], resRegionItems: [] }
 
 export default function reducer(
@@ -99,7 +117,21 @@ export default function reducer(
     case ActionNames.SUCCESS_COUNTRY_API:
       return {
         ...state,
-        resItems: action.responseItems
+        resItems: action.responseItems.reduce((prev: StateInState[], current) => {
+          prev.push({
+            name: CheckName(current.name),
+            flag: CheckFlag(current.flag),
+            alpha2Code: CheckAlpha2Code(current.alpha2Code),
+            capital: CheckCapital(current.capital),
+            demonym: CheckDemonym(current.demonym),
+            region: CheckRegion(current.region),
+            subregion: CheckSubRegion(current.subregion),
+            translations: {
+              ja: current.translations.ja
+            }
+          })
+          return prev
+        }, [])
       }
     case ActionNames.ERROR_COUNTRY_API:
       return {
