@@ -52,12 +52,6 @@ const headerCell: HeaderCell[] = [
   {id: 'capital', label: '首都'},
   {id: 'demonym', label: '住民の呼称'},
   {id: 'region', label: '領域/区域'},
-  {id: 'region', label: '領域/区域'},
-  {id: 'region', label: '領域/区域'},
-  {id: 'region', label: '領域/区域'},
-  {id: 'region', label: '領域/区域'},
-  {id: 'region', label: '領域/区域'},
-  {id: 'region', label: '領域/区域'},
 ]
 
 interface Props {
@@ -77,17 +71,14 @@ const CountryTable: React.FC<Props> = (props): ReactElement => {
     setOrder(isDesc ? 'asc' : 'desc');
     setOrderBy(id);
   };
-
   // any[] 保留 StateInState[] ?
   function sortRedF(arr: any[], orderBy: string) {
     arr.sort((a, b) => {
-      if (a[orderBy].redF<b[orderBy].redF) {
-        return 1
+      if (order === 'asc') {
+        return a[orderBy].redF - b[orderBy].redF
+      }else{
+        return b[orderBy].redF - a[orderBy].redF
       }
-      if (a[orderBy].redF>b[orderBy].redF) {
-        return -1
-      }
-      return 0
     })
     return arr
   }
@@ -150,24 +141,6 @@ const CountryTable: React.FC<Props> = (props): ReactElement => {
                 </TableCell>
                 <TableCell style={{ backgroundColor: (row.demonym.redF) ? 'lightpink' : '' }}>
                   {row.demonym.data}
-                </TableCell>
-                <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
-                  {row.region.data}/{row.subregion.data}
-                </TableCell>
-                <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
-                  {row.region.data}/{row.subregion.data}
-                </TableCell>
-                <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
-                  {row.region.data}/{row.subregion.data}
-                </TableCell>
-                <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
-                  {row.region.data}/{row.subregion.data}
-                </TableCell>
-                <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
-                  {row.region.data}/{row.subregion.data}
-                </TableCell>
-                <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
-                  {row.region.data}/{row.subregion.data}
                 </TableCell>
                 <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
                   {row.region.data}/{row.subregion.data}
