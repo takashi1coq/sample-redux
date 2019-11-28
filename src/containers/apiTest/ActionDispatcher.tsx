@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux'
-import { ApiTestActions, fetchCountryApi, searchRegionsApi } from 'src/modules/apiTest/apiTestModule'
+import { ApiTestActions, fetchCountryApi, searchRegionsApi, testPostAxios } from 'src/modules/apiTest/apiTestModule'
 
 export default class ActionDispatcher {
   constructor(private dispatch: Dispatch<ApiTestActions>) {
@@ -12,5 +12,9 @@ export default class ActionDispatcher {
 
   public getRegion(): void {
     this.dispatch(searchRegionsApi())
+  }
+
+  public testAxiosdis(): void {
+    this.dispatch(testPostAxios())
   }
 }

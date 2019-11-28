@@ -12,3 +12,14 @@ export const requestApi = async (url: string) => {
     })
 }
 
+export const postApi = async (url: string, data: {}) => {
+  return axios
+    .post(url,data)
+    .then(response => {
+      const successResult = response.data
+      return { successResult }
+    })
+    .catch(error => {
+      return {error}
+    })
+}

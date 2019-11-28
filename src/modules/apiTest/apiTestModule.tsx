@@ -8,6 +8,9 @@ export enum ActionNames {
   SEARCH_REGIONS = 'apitest/search_region',
   SUCCESS_SEARCH_REGIONS = 'apitest/success_search_regions',
   ERROR_SEARCH_REGIONS = 'error_search_regions',
+  TEST_POST_AXIOS = 'test_post_axios',
+  SUCCESS_POST_AXIOS = 'success_post_axios',
+  ERROR_POST_AXIOS = 'error_post_axios',
 }
 
 // fetch
@@ -82,7 +85,38 @@ export const errorSearchRegionItem = (items: []): ErrorSearchRegions => ({
   errorItem: items
 })
 
-export type ApiTestActions = FetchCountry | SuccessCountry | ErrorCountry | SearchRegions | SuccessSearchRegions | ErrorSearchRegions
+// test post axios
+interface TestPostAxios extends Action {
+  type: ActionNames.TEST_POST_AXIOS,
+}
+export const testPostAxios = (): TestPostAxios => ({
+  type: ActionNames.TEST_POST_AXIOS,
+})
+
+// test post axios success
+interface SuccessTestAxios extends Action {
+  type: ActionNames.SUCCESS_POST_AXIOS,
+  testAxios: []
+}
+export const successTestAxios = (item: []): SuccessTestAxios => ({
+  type: ActionNames.SUCCESS_POST_AXIOS,
+  testAxios: item
+})
+
+
+// test post axios error
+interface ErrorTestAxios extends Action {
+  type: ActionNames.ERROR_POST_AXIOS,
+  errorAxios: []
+}
+export const errorTestAxios = (item: []): ErrorTestAxios => ({
+  type: ActionNames.ERROR_POST_AXIOS,
+  errorAxios: item
+})
+
+
+
+export type ApiTestActions = FetchCountry | SuccessCountry | ErrorCountry | SearchRegions | SuccessSearchRegions | ErrorSearchRegions | TestPostAxios | SuccessTestAxios | ErrorTestAxios
 
 // state
 export interface DataInState {
@@ -104,10 +138,11 @@ export interface StateInState {
 export interface ApiTestState {
   resItems: StateInState[],
   resRegionItems: string[]
+  testAxios: []
 }
 
 // reducer
-const initialState: ApiTestState = { resItems: [], resRegionItems: [] }
+const initialState: ApiTestState = { resItems: [], resRegionItems: [], testAxios: []}
 
 export default function reducer(
   state: ApiTestState = initialState,
@@ -151,6 +186,16 @@ export default function reducer(
       return {
         ...state,
         resRegionItems: action.errorItem
+      }
+    case ActionNames.SUCCESS_POST_AXIOS:
+      return {
+        ...state,
+        testAxios: action.testAxios
+      }
+    case ActionNames.ERROR_POST_AXIOS:
+      return {
+        ...state,
+        testAxios: action.errorAxios
       }
     default:
       return state

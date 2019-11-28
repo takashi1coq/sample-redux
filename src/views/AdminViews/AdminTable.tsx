@@ -1,9 +1,11 @@
 import React, {ReactElement} from 'react';
-import {TableRow, TableCell, Table, TableBody, makeStyles, Theme, createStyles, Paper, TableHead, createMuiTheme} from '@material-ui/core';
+import {TableRow, TableCell, Table, TableBody, makeStyles, Theme, createStyles, TableHead, createMuiTheme, Card, CardHeader, Avatar, CardContent, withStyles} from '@material-ui/core';
 import {ApiTestState} from 'src/modules/apiTest/apiTestModule';
 import ActionDispatcher from 'src/containers/apiTest/ActionDispatcher';
 import {useDidMount} from 'src/Wrapper';
 import {ThemeProvider} from '@material-ui/core/styles';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import blueGrey from '@material-ui/core/colors/blueGrey';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,16 +21,13 @@ const useStyles = makeStyles((theme: Theme) =>
     table: {
       minWidth: 650,
     },
-    visuallyHidden: {
-      border: 0,
-      clip: 'rect(0 0 0 0)',
-      height: 1,
-      margin: -1,
-      overflow: 'hidden',
-      padding: 0,
-      position: 'absolute',
-      top: 20,
-      width: 1,
+    bigAvatar: {
+      width: 50,
+      height: 50,
+      backgroundColor: '#F0F',
+    },
+    cardHeader: {
+      marginBottom: '-20px',
     },
   }),
 )
@@ -38,6 +37,36 @@ const mainTheme = createMuiTheme({
     fontSize: 9,
   },
 })
+
+
+interface Props {
+  value: ApiTestState
+  actions: ActionDispatcher
+}
+
+
+const BodyTableCell = withStyles(() =>
+  createStyles({
+    root: {
+      padding: '5px'
+    },
+  }),
+)(TableCell);
+
+const StyledTableCell = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: '5px'
+    },
+    head: {
+      backgroundColor: blueGrey[500],
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }),
+)(TableCell);
 
 interface Props {
   value: ApiTestState
@@ -62,91 +91,109 @@ const AdminTable: React.FC<Props> = (props): ReactElement => {
     actions.fetchApi('all')
   })
   return (
-    <ThemeProvider theme={mainTheme}>
     <div className={classes.root}>
-      <Paper className={classes.paper}>
+          {value.resRegionItems.map(name => {
+            return (
+    <Card className={classes.paper}>
+    <CardHeader
+      className={classes.cardHeader}
+      title={name + '  (領域ごとに表示)'}
+      avatar={
+        <Avatar variant="rounded" className={classes.bigAvatar}>
+          <AssignmentIcon />
+        </Avatar>
+      }
+    />
+    <CardContent>
+    <ThemeProvider theme={mainTheme}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell rowSpan={2}>{headerCell.name}</TableCell>
-            <TableCell>{headerCell.ja}</TableCell>
-            <TableCell>{headerCell.flag}</TableCell>
-            <TableCell>{headerCell.alpha2Code}</TableCell>
-            <TableCell>{headerCell.alpha2Code}</TableCell>
-            <TableCell>{headerCell.alpha2Code}</TableCell>
-            <TableCell>{headerCell.alpha2Code}</TableCell>
-            <TableCell>{headerCell.alpha2Code}</TableCell>
+            <StyledTableCell rowSpan={2}>{headerCell.flag}</StyledTableCell>
+            <StyledTableCell>{headerCell.name}</StyledTableCell>
+            <StyledTableCell>{headerCell.ja}</StyledTableCell>
+            <StyledTableCell>{headerCell.alpha2Code}</StyledTableCell>
+            <StyledTableCell>{headerCell.alpha2Code}</StyledTableCell>
+            <StyledTableCell>{headerCell.alpha2Code}</StyledTableCell>
+            <StyledTableCell>{headerCell.alpha2Code}</StyledTableCell>
+            <StyledTableCell>{headerCell.alpha2Code}</StyledTableCell>
           </TableRow>
           <TableRow>
-            <TableCell >{headerCell.capital}</TableCell>
-            <TableCell >{headerCell.demonym}</TableCell>
-            <TableCell >{headerCell.region}</TableCell>
-            <TableCell >{headerCell.region}</TableCell>
-            <TableCell >{headerCell.region}</TableCell>
-            <TableCell >{headerCell.region}</TableCell>
-            <TableCell >{headerCell.region}</TableCell>
+            <StyledTableCell >{headerCell.capital}</StyledTableCell>
+            <StyledTableCell >{headerCell.demonym}</StyledTableCell>
+            <StyledTableCell >{headerCell.region}</StyledTableCell>
+            <StyledTableCell >{headerCell.region}</StyledTableCell>
+            <StyledTableCell >{headerCell.region}</StyledTableCell>
+            <StyledTableCell >{headerCell.region}</StyledTableCell>
+            <StyledTableCell >{headerCell.region}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {value.resItems.map(row => (
-            <>
+            {value.resItems.filter(x => x.region.data === name).map(row => {
+              return (
+                <>
             <TableRow key={row.name.data}>
-              <TableCell rowSpan={2} style={{backgroundColor: (row.name.redF) ? 'lightpink' : '' }}>
-                {row.name.data}
-              </TableCell>
-              <TableCell>
-                {row.translations.ja}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.flag.redF) ? 'lightpink' : '' }}>
+              <BodyTableCell rowSpan={2} style={{ backgroundColor: (row.flag.redF) ? 'lightpink' : '' }}>
                 <img src={row.flag.data} width="50" height="30" />
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{backgroundColor: (row.name.redF) ? 'lightpink' : '' }}>
+                {row.name.data}
+              </BodyTableCell>
+              <BodyTableCell>
+                {row.translations.ja}
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
                 {row.alpha2Code.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
                 {row.alpha2Code.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
                 {row.alpha2Code.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
                 {row.alpha2Code.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.alpha2Code.redF) ? 'lightpink' : '' }}>
                 {row.alpha2Code.data}
-              </TableCell>
+              </BodyTableCell>
             </TableRow>
             <TableRow key={row.capital.data}>
-              <TableCell style={{ backgroundColor: (row.capital.redF) ? 'lightpink' : '' }}>
+              <BodyTableCell style={{ backgroundColor: (row.capital.redF) ? 'lightpink' : '' }}>
                 {row.capital.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.demonym.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.demonym.redF) ? 'lightpink' : '' }}>
                 {row.demonym.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
                 {row.region.data}/{row.subregion.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
                 {row.region.data}/{row.subregion.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
                 {row.region.data}/{row.subregion.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
                 {row.region.data}/{row.subregion.data}
-              </TableCell>
-              <TableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
+              </BodyTableCell>
+              <BodyTableCell style={{ backgroundColor: (row.region.redF) ? 'lightpink' : '' }}>
                 {row.region.data}/{row.subregion.data}
-              </TableCell>
+              </BodyTableCell>
             </TableRow>
-            </>
-          ))}
+                </>
+              )
+          })}
         </TableBody>
       </Table>
-      </Paper>
-    </div>
     </ThemeProvider>
+    </CardContent>
+    </Card>
+            )
+          })}
+    </div>
   )
 }
 
 export default AdminTable
+

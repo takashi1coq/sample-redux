@@ -1,6 +1,7 @@
 import React, {ReactElement,} from 'react'
 import {GridList, GridListTile, Box, makeStyles, Theme, createStyles, Paper} from '@material-ui/core';
 import AdminPieChart from 'src/views/AdminViews/AdminPieChart';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -11,6 +12,10 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowX: 'auto',
       marginBottom: theme.spacing(1),
     },
+    box: {
+      paddingTop: '15px',
+      paddingLeft: '10px',
+    }
   }),
 )
 
@@ -23,7 +28,7 @@ const AdminCharts: React.FC<Props> = (props): ReactElement => {
   const {title} = props
   return (
     <Paper className={classes.paper}>
-      <Box textAlign="left">{title}</Box>
+      <Box textAlign="left" className={classes.box}><AssignmentIcon />{title}</Box>
       <GridList cols={3}>
         <GridListTile style={{ height: 'auto' }}>
           <AdminPieChart title='項目１' />

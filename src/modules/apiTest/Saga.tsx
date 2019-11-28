@@ -1,6 +1,6 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
 import { ActionNames, FetchCountry } from 'src/modules/apiTest/apiTestModule'
-import {requestApi} from 'src/modules/Api'
+import {requestApi, postApi} from 'src/modules/Api'
 
 export function* fetchCountry(action: FetchCountry) {
   let url = 'https://restcountries.eu/rest/v2/all'
@@ -25,6 +25,20 @@ function* getRegion() {
   }
 }
 
+function* textAxiosAct() {
+  let url = 'http://localhost:3000/checkService'
+  let data = {
+    name: 'name',
+    num: '3',
+  }
+  const {successResult, error} = yield call(postApi, url, data)
+  if (successResult) {
+    yield put({type: ActionNames.SUCCESS_POST_AXIOS, testAxios: successResult})
+  } else {
+    yield put({type: ActionNames.ERROR_SEARCH_REGIONS, errorAxios: error})
+  }
+}
+
 export function* countrySaga() {
   yield takeEvery(ActionNames.FETCH_COUNTRY, fetchCountry)
 }
@@ -33,3 +47,6 @@ export function* regionSaga() {
   yield takeEvery(ActionNames.SEARCH_REGIONS, getRegion)
 }
 
+export function* testAxiosSaga() {
+  yield takeEvery(ActionNames.TEST_POST_AXIOS, textAxiosAct)
+}
